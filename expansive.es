@@ -3,9 +3,12 @@ Expansive.load({
         name: 'canon',
         script: `
             public function renderCanonical() {
-print("HERE", meta.dest)
                 if (meta.dest.basename.trimExt() == 'index') {
-                    write('<link href="' + meta.abs.dirname + '/" rel="canonical" />')
+                    let ref: String = meta.abs.dirname
+                    if (!ref.endsWith('/')) {
+                        ref += '/'
+                    }
+                    write('<link href="' + ref + '" rel="canonical" />')
                 }
             }
         `
